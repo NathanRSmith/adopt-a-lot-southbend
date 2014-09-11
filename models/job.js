@@ -1,7 +1,8 @@
 module.exports = function (db) {
 
     var Job = db.Model.extend({
-        tableName: 'job'
+        tableName: 'job',
+        hasTimestamps: true
     });
 
     return {

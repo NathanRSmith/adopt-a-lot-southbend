@@ -7,8 +7,8 @@ script#map_entry_info_window_template(type="text/underscore-template")
               input(type="hidden" name="latitude" value!="<%= location_1.latitude %>")
               input(type="hidden" name="longitude" value!="<%= location_1.longitude %>")
           div
-              input(type="text" placeholder="Your Name")
+              input(type="text" name="name" placeholder="Your Name")
           div
-              input(type="text" placeholder="What did you do?")
+              input(type="text" name="description" placeholder="What did you do?")
           div
               button.btn.btn-primary(type="submit" value="Save") Save

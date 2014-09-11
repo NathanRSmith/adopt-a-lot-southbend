@@ -1,3 +1,4 @@
 module.exports = {
-    'volunteer': require('./volunteer')
+    // 'volunteer': require('./volunteer')
+    'jobs': require('./jobs')
 }

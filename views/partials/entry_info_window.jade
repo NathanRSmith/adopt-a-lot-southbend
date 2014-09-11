@@ -1,6 +1,6 @@
 script#map_entry_info_window_template(type="text/underscore-template")
-    div(style="width:180px; height: 80px;")
-      form(action="/jobs" method="POST")
+    div(style="width:180px; height: 90px;")
+      form#new-job(action="/jobs" method="POST")
           div
               input(type="hidden" name="state_parcel_id" value!="<%= state_parcel_id %>")
               input(type="hidden" name="parcel_id" value!="<%= parcel_id %>")
@@ -11,4 +11,4 @@ script#map_entry_info_window_template(type="text/underscore-template")
           div
               input(type="text" placeholder="What did you do?")
           div
-              button(type="button" value="Save") Save
+              button.btn.btn-primary(type="submit" value="Save") Save

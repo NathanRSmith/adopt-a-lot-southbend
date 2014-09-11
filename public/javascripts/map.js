@@ -1,10 +1,11 @@
 var EntryModel = Backbone.Model.extend({
     infoWindowTemplate: _.template($('#map_entry_info_window_template').html()),
+
     idAttribute: 'state_parcel_id',
 
     // Display the entry info in the map InfoWindow
     displayInfoWindow: function(marker) {
-        infoWindow.setContent(this.infoWindowTemplate(this.toJSON()));    // render template
+        infoWindow.setContent(this.infoWindowTemplate(this.toJSON()));
         infoWindow.open(map, marker);
     }
 });
@@ -13,10 +14,12 @@ var siteData = new Backbone.Collection([], {model: EntryModel});
 
 var SearchView = Backbone.View.extend({
     el: '#searchContainer',
+
     events: {
         'keypress #searchBox': 'enterHandler',
         'click #searchBtn': 'search'
     },
+
     search: function() {
         var addr = this.$('#searchBox').val();
         if(addr) {
@@ -31,6 +34,7 @@ var SearchView = Backbone.View.extend({
             });
         }
     },
+
     enterHandler: function(e) {
         if(e.keyCode == 13) { this.search(); }
     }
@@ -67,6 +71,11 @@ $(function() {
 
     google.maps.event.addListener(map, 'click', function() { infoWindow.close(); });
 
+    $(document).on("submit", "#new-job", function(e) {
+        e.preventDefault();
+        $.post('/jobs', $("#new-job").serialize());
+    });
+
     // Retrieve our data and plot it
     $.getJSON(url, function(data, textstatus) {
           console.log('Data retrieved');
@@ -74,8 +83,10 @@ $(function() {
 
           $.each(data, function(i, entry) {
               var marker = new google.maps.Marker({
-                  position: new google.maps.LatLng(entry.location_1.latitude,
-                                                   entry.location_1.longitude),
+                  position: new google.maps.LatLng(
+                      entry.location_1.latitude,
+                      entry.location_1.longitude
+                  ),
                   map: map,
                   title: location.name
               });

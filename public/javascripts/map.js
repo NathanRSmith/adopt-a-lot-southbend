@@ -8,9 +8,8 @@ var EntryModel = Backbone.Model.extend({
         infoWindow.open(map, marker);
     }
 });
-siteData = new Backbone.Collection([], {model: EntryModel});
 
-
+var siteData = new Backbone.Collection([], {model: EntryModel});
 
 var SearchView = Backbone.View.extend({
     el: '#searchContainer',
@@ -39,20 +38,17 @@ var SearchView = Backbone.View.extend({
 
 var FormView = Backbone.View.extend({
     el: '#formContainer',
+
     initialize: function(options) {
         this.listenTo(siteData, 'selected', this.handleItemSelected);
     },
+
     handleItemSelected: function(model) {
         this.$('#stateParcelID').val(model.id);
     }
 });
 
-
-
-
-
-
-$(window).load(function() {
+$(function() {
     // Construct the catalog query string
     url = 'http://data.southbendin.gov/resource/d2un-9vvp.json?$$app_token=CGxaHQoQlgQSev4zyUh5aR5J3';
 
@@ -62,12 +58,12 @@ $(window).load(function() {
       zoom: 14,
       center: center
     }
+
     infoWindow = new google.maps.InfoWindow();
     geocoder = new google.maps.Geocoder();
     map = new google.maps.Map(document.getElementById("map"), mapOptions);
     formView = new FormView();
     searchView = new SearchView();
-
 
     google.maps.event.addListener(map, 'click', function() { infoWindow.close(); });
 
@@ -83,7 +79,8 @@ $(window).load(function() {
                   map: map,
                   title: location.name
               });
-              marker.set('id', entry.state_parcel_id);    // Set data entry id
+
+              marker.set('id', entry.state_parcel_id);
 
               // Display info for entry on marker click
               google.maps.event.addListener(marker, 'click', function() {
